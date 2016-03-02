@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var $ = require('jquery');
 
 var Bookmark= React.createClass({
   render: function() {
@@ -14,8 +15,24 @@ var Bookmark= React.createClass({
 });
 
 var BookmarkList = React.createClass({
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
   render: function() {
-    var items  = this.props.data.map(function(item) {
+    var items  = this.state.data.map(function(item) {
       return (
         <Bookmark
           title={item.title}
@@ -33,20 +50,7 @@ var BookmarkList = React.createClass({
   }
 });
 
-var data = [
-  {
-    "id": "8586188a-3e72-4cec-8513-4af02d83be75",
-    "url": "http://pezzato.net",
-    "title": "Alessandro Pezzato Blog",
-    "description": "A blog about stuff",
-    "tags": ["alessandro", "pezzato", "alepez"],
-    "user": "alepez",
-    "notes": "Lorem ipsum dolor sit amet."
-  }
-]
-
-
 ReactDOM.render(
-  <BookmarkList data={data}/>,
+  <BookmarkList url="http://localhost:3000/bookmarks" />,
   document.getElementById('bmrk-root')
 );
