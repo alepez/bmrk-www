@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var babelify = require('babelify');
+var livereload = require('gulp-livereload');
 
 var scriptsDir = './app';
 var buildDir = './server/public';
@@ -30,7 +31,8 @@ function buildScript(file, watch) {
     var stream = bundler.bundle();
     return stream.on('error', console.log.bind(console))
       .pipe(source(file))
-      .pipe(gulp.dest(buildDir + '/'));
+      .pipe(gulp.dest(buildDir + '/'))
+      .pipe(livereload({ start: true }));
   }
 
   bundler.on('update', function () {
