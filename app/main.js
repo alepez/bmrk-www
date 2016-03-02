@@ -2,6 +2,29 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var $ = require('jquery');
 
+var Tag = React.createClass({
+  render: function() {
+    return (
+      <span className="tag">{this.props.tag}</span>
+    );
+  }
+});
+
+var Tags = React.createClass({
+  render: function() {
+    var items = this.props.tags.map(function(item) {
+      return (
+        <Tag tag={item} />
+      );
+    });
+    return (
+      <div className="tags">
+        {items}
+      </div>
+    );
+  }
+});
+
 var Bookmark= React.createClass({
   render: function() {
     return (
@@ -9,6 +32,7 @@ var Bookmark= React.createClass({
         <span className="title">{this.props.title}</span>
         <span className="url">{this.props.url}</span>
         <span className="description">{this.props.description}</span>
+        <Tags tags={this.props.tags} />
       </div>
     );
   }
@@ -35,9 +59,11 @@ var BookmarkList = React.createClass({
     var items  = this.state.data.map(function(item) {
       return (
         <Bookmark
-          title={item.title}
+          id={item.id}
           url={item.url}
+          title={item.title}
           description={item.description}
+          tags={item.tags}
           key={item.id}
         />
       );

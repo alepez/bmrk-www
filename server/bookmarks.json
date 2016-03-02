@@ -7,5 +7,14 @@
     "tags": ["alessandro", "pezzato", "alepez"],
     "user": "alepez",
     "notes": "Lorem ipsum dolor sit amet."
+  },
+  {
+    "id": "d5d96955-04a2-4bbc-a49f-cbf891997e34",
+    "url": "http://example.com",
+    "title": "The Example",
+    "description": "Example example examples",
+    "tags": ["example"],
+    "user": "alepez",
+    "notes": "This domain is established to be used for illustrative examples in documents. You may use this domain in examples without prior coordination or asking for permission."
   }
 ]
