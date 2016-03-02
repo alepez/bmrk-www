@@ -3,13 +3,13 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var uuid = require('node-uuid');
-var app = express();
 
 var bookmarksFile = path.join(__dirname, 'bookmarks.json');
 
+/* API server */
+var app = express();
 app.set('port', (process.env.PORT || 3000));
 
-app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -59,4 +59,16 @@ app.post('/bookmarks', function(req, res) {
 
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');
+});
+
+/* static files server */
+var www = express();
+www.set('port', (process.env.PORT || 3001));
+
+www.use('/', express.static(path.join(__dirname, 'public')));
+www.use(bodyParser.json());
+www.use(bodyParser.urlencoded({extended: true}));
+
+www.listen(www.get('port'), function() {
+  console.log('Server started: http://localhost:' + www.get('port') + '/');
 });
