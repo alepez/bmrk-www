@@ -31,22 +31,22 @@ app.get('/utils/getTitleFromUrl', function(req, res) {
 });
 
 app.get('/bookmarks', function(req, res) {
-  fs.readFile(bookmarksFile, function(err, data) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
+  fs.readFile(bookmarksFile, function(err, req) {
+    var data = [];
+    if (!err) {
+      data = JSON.parse(data);
     }
-    res.json(JSON.parse(data));
+    res.json(data);
   });
 });
 
 app.post('/bookmarks', function(req, res) {
   fs.readFile(bookmarksFile, function(err, data) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
+    var bookmarks = [];
+    if (!err) {
+      bookmarks = JSON.parse(data);
     }
-    var bookmarks = JSON.parse(data);
+
     var newBookmark = {
       id: uuid.v4(),
       url: req.body.url,
@@ -56,11 +56,12 @@ app.post('/bookmarks', function(req, res) {
       user: req.body.user,
       notes: req.body.notes
     };
+
     bookmarks.push(newBookmark);
+
     fs.writeFile(bookmarksFile, JSON.stringify(bookmarks, null, 4), function(err) {
       if (err) {
         console.error(err);
-        process.exit(1);
       }
       res.json(bookmarks);
     });
