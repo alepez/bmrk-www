@@ -3,6 +3,7 @@ var path = require('path');
 var express = require('express');
 var bodyParser = require('body-parser');
 var uuid = require('node-uuid');
+var getTitleFromUrl = require('./utils.js').getTitleFromUrl;
 
 var bookmarksFile = path.join(__dirname, 'bookmarks.json');
 
@@ -11,12 +12,22 @@ var app = express();
 app.set('port', (process.env.PORT || 3000));
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.use(function(req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Cache-Control', 'no-cache');
-    next();
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Cache-Control', 'no-cache');
+  next();
+});
+
+app.get('/utils/getTitleFromUrl', function(req, res) {
+  getTitleFromUrl(req.body.url).then(function(title) {
+    res.json({
+      'title': title
+    });
+  })
 });
 
 app.get('/bookmarks', function(req, res) {
@@ -67,7 +78,9 @@ www.set('port', (process.env.PORT || 3001));
 
 www.use('/', express.static(path.join(__dirname, 'public')));
 www.use(bodyParser.json());
-www.use(bodyParser.urlencoded({extended: true}));
+www.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 www.listen(www.get('port'), function() {
   console.log('Server started: http://localhost:' + www.get('port') + '/');
