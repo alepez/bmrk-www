@@ -6,7 +6,7 @@ module.exports = React.createClass({
     var site = (new URL(this.props.url)).hostname;
     return (
       <div className="bookmark">
-        <a href="{this.props.url}">
+        <a href={this.props.url}>
           <span className="title">{this.props.title}</span>
           <span className="site">{site}</span>
         </a>
