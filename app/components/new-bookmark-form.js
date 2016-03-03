@@ -14,14 +14,14 @@ module.exports = React.createClass({
     this.setState({description: e.target.value});
   },
   handleTagsChange: function(e) {
-    this.setState({tags: e.target.value});
+    this.setState({tags: e.target.value.split(',')});
   },
   handleNotesChange: function(e) {
     this.setState({notes: e.target.value});
   },
   handleSubmit: function(e) {
     e.preventDefault();
-    console.log(this.state);
+    this.props.onBookmarkSubmit(this.state);
   },
   render: function() {
     return (
@@ -52,7 +52,7 @@ module.exports = React.createClass({
             className="textField"
             type="text"
             placeholder="tags"
-            value={this.state.tags}
+            value={(this.state.tags || []).join(',')}
             onChange={this.handleTagsChange}
           />
           <textarea
