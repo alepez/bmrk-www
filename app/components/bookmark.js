@@ -14,7 +14,12 @@ module.exports = React.createClass({
     this.props.onDelete(this.props.uuid);
   },
   render: function() {
-    var site = (new URL(this.props.url)).hostname;
+    var site;
+    try {
+      site = (new URL(this.props.url)).hostname;
+    } catch (e) {
+      /* handle error */
+    }
     return (
       <div className="bookmark">
         <a href={ this.props.url }>
