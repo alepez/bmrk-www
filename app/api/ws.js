@@ -8,11 +8,13 @@ module.exports = function(options) {
   }
 
   var request = function(url, method, req) {
-    console.log('request', req);
+    // console.log(`request ${url} ${method} ${JSON.stringify(req)}`);
     return $.ajax({
       url: makeFullUrl(url),
       dataType: 'json',
       cache: false,
+      method: method,
+      data: req,
       // success: function(res) {
       // }.bind(this),
       error: function(xhr, status, err) {

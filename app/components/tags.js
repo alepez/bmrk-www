@@ -3,7 +3,7 @@ var Tag = require('./tag.js');
 
 module.exports = React.createClass({
   render: function() {
-    var items = this.props.tags.map(function(item) {
+    var items = this.props.tags && this.props.tags.map(function(item) {
       return (
         <Tag tag={item} key={item} />
       );

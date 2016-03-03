@@ -38,6 +38,7 @@ module.exports = React.createClass({
   },
   handleSubmit: function(e) {
     e.preventDefault();
+    console.log(this.state);
     this.props.onBookmarkSubmit(this.state);
   },
   handleTitleFocus: function() {
