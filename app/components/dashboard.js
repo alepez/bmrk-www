@@ -3,7 +3,7 @@ var React = require('react');
 var Bookmarks = require('./bookmarks.js')
 var NewBookmarkForm = require('./new-bookmark-form.js')
 
-var BmrkApi = require('../api/BmrkApi.js');
+var BmrkApi = require('../api/bmrk-api.js');
 
 var bmrk = BmrkApi({
   url: 'http://localhost:3000'
@@ -17,7 +17,7 @@ module.exports = React.createClass({
   },
   componentDidMount: function() {
     var that = this;
-    bmrk.get('bookmarks').then(function(res) {
+    bmrk.bookmarks.get().then(function(res) {
       that.setState({
         bookmarks: res
       });
@@ -25,7 +25,7 @@ module.exports = React.createClass({
   },
   handleBookmarkSubmit: function(bookmark) {
     var that = this;
-    bmrk.post('bookmarks', bookmark).then(function(res) {
+    bmrk.bookmarks.post(bookmark).then(function(res) {
       that.setState({
         bookmarks: res
       });
