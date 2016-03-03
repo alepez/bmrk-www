@@ -1,4 +1,5 @@
 var React = require('react');
+var classnames = require('classnames');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -25,7 +26,7 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <div className="newBookmarkForm clearfix">
+      <div className={ classnames( 'newBookmarkForm', 'clearfix', {'folded': !this.state.url } ) }>
         <form onSubmit={this.handleSubmit}>
           <input
             className="textField"
@@ -35,35 +36,35 @@ module.exports = React.createClass({
             onChange={this.handleUrlChange}
           />
           <input
-            className="textField"
+            className="textField hiddenWhenFolded"
             type="text"
             placeholder="title"
             value={this.state.title}
             onChange={this.handleTitleChange}
           />
           <input
-            className="textField"
+            className="textField hiddenWhenFolded"
             type="text"
             placeholder="description"
             value={this.state.description}
             onChange={this.handleDescriptionChange}
           />
           <input
-            className="textField"
+            className="textField hiddenWhenFolded"
             type="text"
             placeholder="tags"
             value={(this.state.tags || []).join(',')}
             onChange={this.handleTagsChange}
           />
           <textarea
-            className="textArea"
+            className="textArea hiddenWhenFolded"
             placeholder="notes"
             value={this.state.notes}
             onChange={this.handleNotesChange}>
           </textarea>
 
           <input
-            className="submitBtn"
+            className="submitBtn hiddenWhenFolded"
             type="submit"
             value="Add"
           />

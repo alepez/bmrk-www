@@ -107,6 +107,10 @@ html, body {
   padding: 0.25em 0.25em;
 }
 
+.newBookmarkForm.folded .hiddenWhenFolded {
+  display: none;
+}
+
 .newBookmarkForm .textArea,
 .newBookmarkForm .textField {
   display: block;

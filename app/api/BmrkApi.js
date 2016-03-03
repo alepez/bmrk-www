@@ -13,17 +13,15 @@ module.exports = function(options) {
       url: makeFullUrl(url),
       dataType: 'json',
       cache: false,
-      success: function(res) {
-        console.log(res);
-      }.bind(this),
+      // success: function(res) {
+      // }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        // console.error(this.props.url, status, err.toString());
       }.bind(this)
     });
   };
 
   var get = function(url, data) {
-    console.log('get');
     return request(url, 'get', data);
   };
 
