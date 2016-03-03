@@ -12,6 +12,7 @@ var app = express();
 app.set('port', (process.env.PORT || 3000));
 
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -31,12 +32,8 @@ app.get('/utils/getTitleFromUrl', function(req, res) {
 });
 
 app.get('/bookmarks', function(req, res) {
-  fs.readFile(bookmarksFile, function(err, req) {
-    var data = [];
-    if (!err) {
-      data = JSON.parse(data);
-    }
-    res.json(data);
+  fs.readFile(bookmarksFile, function(err, data) {
+    res.json(err ? [] : JSON.parse(data));
   });
 });
 
@@ -48,7 +45,7 @@ app.post('/bookmarks', function(req, res) {
     }
 
     var newBookmark = {
-      id: uuid.v4(),
+      uuid: uuid.v4(),
       url: req.body.url,
       title: req.body.title,
       description: req.body.description,
@@ -68,6 +65,9 @@ app.post('/bookmarks', function(req, res) {
   });
 });
 
+app.delete('/bookmarks/:uuid', function(req, res) {
+  console.log(`remove ${req.params.uuid}`);
+});
 
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');
