@@ -1,8 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Bookmarks = require('./components/bookmarks.js')
+var Dashboard = require('./components/dashboard.js')
 
 ReactDOM.render(
-  <Bookmarks url="http://localhost:3000/bookmarks" />,
+  <Dashboard url="http://localhost:3000" />,
   document.getElementById('bmrk-root')
 );

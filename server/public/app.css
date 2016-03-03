@@ -42,6 +42,10 @@ table {
 	border-spacing: 0;
 }
 
+.clearfix {
+  overflow: auto;
+}
+
 html, body {
   background-color: #000000;
   font-family: monospace;
@@ -96,4 +100,28 @@ html, body {
   color: #333333;
   display: block;
   padding: 0.5em 1em;
+}
+
+.newBookmarkForm {
+  display: block;
+  padding: 0.25em 0.25em;
+}
+
+.newBookmarkForm .textArea,
+.newBookmarkForm .textField {
+  display: block;
+  box-sizing: border-box;
+  font-size: 100%;
+  margin: 0.25em 0;
+  padding: 0.5em 0.5em;
+  width: 100%;
+}
+
+.newBookmarkForm .submitBtn {
+  background-color: #ffffff;
+  padding: 0.5em 1em;
+  border: none;
+  display: inline-block;
+  font-size: 100%;
+  float: right;
 }
