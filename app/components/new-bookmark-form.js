@@ -1,11 +1,7 @@
 var React = require('react');
 var classnames = require('classnames');
 
-/* FIXME: bmrk is a service. Inject from parent? From a services module??? */
-var BmrkApi = require('../api/bmrk-api.js');
-var bmrk = BmrkApi({
-  url: 'http://localhost:3000'
-});
+var bmrk = require('../services.js').bmrk;
 
 module.exports = React.createClass({
   getInitialState: function() {

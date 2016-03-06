@@ -54,7 +54,7 @@ app.post('/bookmarks', function(req, res) {
       notes: req.body.notes
     };
 
-    bookmarks.push(newBookmark);
+    bookmarks.splice(0, 0, newBookmark);
 
     fs.writeFile(bookmarksFile, JSON.stringify(bookmarks, null, 4), function(err) {
       if (err) {

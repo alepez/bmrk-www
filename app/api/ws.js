@@ -14,7 +14,8 @@ module.exports = function(options) {
       dataType: 'json',
       cache: false,
       method: method,
-      data: req,
+      contentType : 'application/json',
+      data: JSON.stringify(req),
       // success: function(res) {
       // }.bind(this),
       error: function(xhr, status, err) {
