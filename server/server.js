@@ -65,8 +65,8 @@ app.post('/bookmarks', function(req, res) {
   });
 });
 
-app.delete('/bookmarks/:uuid', function(req, res) {
-  console.log(`remove ${req.params.uuid}`);
+app.delete('/bookmarks/:id', function(req, res) {
+  console.log(`remove ${req.params.id}`);
 });
 
 app.listen(app.get('port'), function() {

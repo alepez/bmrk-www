@@ -11,7 +11,7 @@ var DeleteBtn = React.createClass({
 
 module.exports = React.createClass({
   handleDelete: function() {
-    this.props.onDelete(this.props.uuid);
+    this.props.onDelete(this.props.id);
   },
   render: function() {
     var site;
