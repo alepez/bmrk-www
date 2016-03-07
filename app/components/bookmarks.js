@@ -8,7 +8,7 @@ module.exports = React.createClass({
   },
   render: function() {
     var that = this;
-    var items  = this.props.bookmarks && this.props.bookmarks.map(function(item) {
+    var items  = this.props.bookmarks.map(function(item) {
       return (
         <Bookmark
           id={item.id}
