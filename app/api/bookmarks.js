@@ -7,5 +7,5 @@ module.exports = function(ws) {
       return ws.post('bookmarks', req);
     }
   };
-}
+};
 

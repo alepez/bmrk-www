@@ -15,17 +15,15 @@ module.exports = React.createClass({
     var that = this;
     bmrk.bookmarks.get().then(function(res) {
       that.setState({
-        bookmarks: res['data']
+        bookmarks: res
       });
     });
   },
   handleBookmarkSubmit: function(bookmark) {
     var that = this;
-    bmrk.bookmarks.post({'bookmark': bookmark}).then(function(res) {
-      var bookmarks = that.state.bookmarks;
-      bookmarks.splice(0, 0, res['data']);
+    bmrk.bookmarks.post(bookmark).then(function(res) {
       that.setState({
-        bookmarks: bookmarks
+        bookmarks: res
       });
     });
   },
