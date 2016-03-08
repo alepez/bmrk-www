@@ -40,9 +40,9 @@ module.exports = React.createClass({
   handleTitleFocus: function() {
     var that = this;
     if (!that.state.title) {
-      bmrk.utils.getTitleFromUrl(that.state.url).then(function(title) {
+      bmrk.utils.info(that.state.url).then(function(res) {
         that.setState({
-          title: title
+          title: res.data.title
         });
       })
     }

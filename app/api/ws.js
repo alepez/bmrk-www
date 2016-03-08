@@ -9,19 +9,27 @@ module.exports = function(options) {
 
   var request = function(url, method, req) {
     // console.log(`request ${url} ${method} ${JSON.stringify(req)}`);
-    return $.ajax({
+    var options = {
       url: makeFullUrl(url),
       dataType: 'json',
       cache: false,
       method: method,
-      contentType : 'application/json',
+      contentType: 'application/json',
       data: JSON.stringify(req),
-      // success: function(res) {
-      // }.bind(this),
       error: function(xhr, status, err) {
-        // console.error(this.props.url, status, err.toString());
+        console.error("Error communicating with webservice");
       }.bind(this)
-    });
+    };
+
+    if (method === 'get') {
+      options.data = req;
+    } else {
+      options.dataType = 'json';
+      options.contentType = 'application/json';
+      options.data = JSON.stringify(req);
+    }
+
+    return $.ajax(options);
   };
 
   var get = function(url, data) {
@@ -42,4 +50,3 @@ module.exports = function(options) {
     del: del
   };
 }
-

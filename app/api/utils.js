@@ -2,12 +2,12 @@ var q = require('q');
 
 module.exports = function(ws) {
   return {
-    getTitleFromUrl: function(url) {
+    info: function(url) {
       var deferred = q.defer();
-      ws.get('utils/getTitleFromUrl', {
+      ws.get('utils/info', {
         'url': url
       }).then(function(res) {
-        deferred.resolve(res.title);
+        deferred.resolve(res);
       });
       return deferred.promise;
     }
