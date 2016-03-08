@@ -5,6 +5,9 @@ module.exports = function(ws) {
     },
     post: function(req) {
       return ws.post('bookmarks', req);
+    },
+    del: function(id) {
+      return ws.del('bookmarks/' + id);
     }
   };
 };

@@ -32,9 +32,14 @@ module.exports = function(options) {
     return request(url, 'post', data);
   };
 
+  var del = function(url, data) {
+    return request(url, 'delete', data);
+  };
+
   return {
     get: get,
-    post: post
+    post: post,
+    del: del
   };
 }
 

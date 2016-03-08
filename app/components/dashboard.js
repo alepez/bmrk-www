@@ -29,12 +29,23 @@ module.exports = React.createClass({
       });
     });
   },
+  handleBookmarkDelete: function(id) {
+    var that = this;
+    bmrk.bookmarks.del(id).then(function() {
+      var updatedBookmarks = that.state.bookmarks.filter(function(bookmark) {
+        return bookmark.id !== id;
+      });
+      that.setState({bookmarks: updatedBookmarks});
+    });
+  },
   render: function() {
     return (
       <div className="dashboard">
         <NewBookmarkForm onBookmarkSubmit={ this.handleBookmarkSubmit } />,
-        <Bookmarks bookmarks={ this.state.bookmarks } />,
+        <Bookmarks
+          bookmarks={ this.state.bookmarks }
+          handleDelete={ this.handleBookmarkDelete } />,
       </div>
-      );
+    );
   }
 });

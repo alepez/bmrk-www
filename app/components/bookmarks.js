@@ -2,10 +2,6 @@ var React = require('react');
 var Bookmark = require('./bookmark.js')
 
 module.exports = React.createClass({
-  handleDelete: function(id) {
-    // FIXME call ws
-    console.log(`delete ${id}`);
-  },
   render: function() {
     var that = this;
     var items  = this.props.bookmarks.map(function(item) {
@@ -17,7 +13,7 @@ module.exports = React.createClass({
           description={item.description}
           tags={item.tags}
           key={item.id}
-          onDelete={that.handleDelete}
+          onDelete={that.props.handleDelete}
         />
       );
     });
