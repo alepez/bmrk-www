@@ -21,7 +21,9 @@ module.exports = React.createClass({
   },
   handleBookmarkSubmit: function(bookmark) {
     var that = this;
-    bmrk.bookmarks.post({'bookmark': bookmark}).then(function(res) {
+    bmrk.bookmarks.post({
+      'bookmark': bookmark
+    }).then(function(res) {
       var bookmarks = that.state.bookmarks;
       bookmarks.splice(0, 0, res['data']);
       that.setState({
@@ -32,20 +34,20 @@ module.exports = React.createClass({
   handleBookmarkDelete: function(id) {
     var that = this;
     bmrk.bookmarks.del(id).then(function() {
-      var updatedBookmarks = that.state.bookmarks.filter(function(bookmark) {
+      var bookmarks = that.state.bookmarks.filter(function(bookmark) {
         return bookmark.id !== id;
       });
-      that.setState({bookmarks: updatedBookmarks});
+      that.setState({
+        bookmarks: bookmarks
+      });
     });
   },
   render: function() {
     return (
       <div className="dashboard">
         <NewBookmarkForm onBookmarkSubmit={ this.handleBookmarkSubmit } />,
-        <Bookmarks
-          bookmarks={ this.state.bookmarks }
-          handleDelete={ this.handleBookmarkDelete } />,
+        <Bookmarks bookmarks={ this.state.bookmarks } handleDelete={ this.handleBookmarkDelete } />,
       </div>
-    );
+      );
   }
 });
