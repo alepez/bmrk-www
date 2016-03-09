@@ -4,6 +4,8 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var babelify = require('babelify');
 var livereload = require('gulp-livereload');
+var less = require('gulp-less');
+var path = require('path');
 
 var scriptsDir = './app';
 var buildDir = './server/public';
@@ -32,10 +34,12 @@ function buildScript(file, watch) {
     return stream.on('error', console.log.bind(console))
       .pipe(source(file))
       .pipe(gulp.dest(buildDir + '/'))
-      .pipe(livereload({ start: true }));
+      .pipe(livereload({
+        start: true
+      }));
   }
 
-  bundler.on('update', function () {
+  bundler.on('update', function() {
     rebundle();
     console.log('rebundle');
   });
@@ -43,10 +47,18 @@ function buildScript(file, watch) {
   return rebundle();
 }
 
-gulp.task('build', function () {
+gulp.task('less', function() {
+  return gulp.src('app/style/app.less')
+    .pipe(less({
+      paths: [path.join(__dirname, 'node_modules/purecss/build/')]
+    }))
+    .pipe(gulp.dest(buildDir + '/'));
+});
+
+gulp.task('build', function() {
   return buildScript('main.js', false);
 });
 
-gulp.task('watch', ['build'], function () {
+gulp.task('watch', ['build'], function() {
   return buildScript('main.js', true);
 });
